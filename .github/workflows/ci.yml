@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install pytest (test-only dependency)
+        run: python -m pip install pytest
+      - name: Run tests
+        run: python -m pytest -v
+      - name: Demo on the sample logs
+        # The tool exits 0 even when it finds alerts, so findings never fail the build.
+        run: |
+          {
+            echo "### log-sentinel on samples/ (Python ${{ matrix.python-version }})"
+            echo '```text'
+            python -m log_sentinel --auth samples/auth.log --web samples/access.log --year 2026
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -96,6 +96,12 @@ The full walkthrough, with the reasoning behind every threshold and the likely f
 - Add an allowlist for known-good IP addresses such as monitoring systems
 - Add CSV output for spreadsheets
 
+## Related projects
+
+- [phish-triage](https://github.com/eriksalihu/phish-triage): scores .eml files for phishing risk offline and lists defanged indicators for the ticket
+- [soc-playbooks](https://github.com/eriksalihu/soc-playbooks): six tier-1 SOC alert scenarios, each with a Sigma detection rule and a response playbook
+- [linux-audit](https://github.com/eriksalihu/linux-audit): read-only Bash script that checks basic Linux hardening and prints PASS, WARN or FAIL
+
 ## License
 
 [MIT](LICENSE)
